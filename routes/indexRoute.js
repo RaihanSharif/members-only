@@ -1,12 +1,9 @@
 // import other routes into here
-
-const someRouter = require("./someRoute");
+const indexController = require("../controllers/indexController");
 
 // called inside of app.js to mount the routes
 const mountRoutes = (app) => {
-  app.use("/", someRouter);
-  app.use("/", someRouter2);
-  app.use("/", someRouter3);
+  app.use("/", indexController);
 };
 
 module.exports = mountRoutes;
