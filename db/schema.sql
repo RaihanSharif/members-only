@@ -5,7 +5,6 @@ CHECK(
    VALUE ~ '^\w+(\.)?\w@\w+(\.[a-zA-Z]{2,}){1,2}$'
 );
 
-
 CREATE TABLE IF NOT EXISTS account (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   fname VARCHAR(255),
@@ -13,8 +12,15 @@ CREATE TABLE IF NOT EXISTS account (
   username VARCHAR(255) UNIQUE NOT NULL,
   email domain_email UNIQUE NOT NULL, 
   password VARCHAR(255) NOT NULL,
-  is_member BOOLEAN DEFAULT false,
-);
+  is_member BOOLEAN DEFAULT false);
+
+create table account(
+  id int generated always as identity primary key,
+  fname varchar(255),lname varchar(255), 
+  username varchar(255) not null unique,
+  email domain_email not null unique,
+  password varchar(255) not null,
+  is_member boolean default false);
 
 CREATE TABLE IF NOT EXISTS topic (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -36,8 +42,6 @@ CREATE TABLE IF NOT EXISTS post (
 );
 
 
--- a function to set the updated_at attribute col 
--- in the post or topic table to current timestamp
 CREATE OR REPLACE FUNCTION update_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -47,17 +51,11 @@ END;
 $$ LANGUAGE plpgsql;
 
 
--- whenever a row in the post table is changed, 
--- it triggers the update function 
--- must re-register trigger if table is dropped
--- and then created again
 CREATE TRIGGER post_updated_at_trigger
 BEFORE UPDATE ON post
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at();
 
--- trigger update of topic 'updated_at' field 
--- any time a row changes
 CREATE TRIGGER topic_updated_at_trigger
 BEFORE UPDATE ON topic
 FOR EACH ROW
