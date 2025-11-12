@@ -5,7 +5,13 @@ const pool = require("../db/pool");
 
 function getSignupForm(req, res) {
   console.log("rendering sign up form");
-  res.render("sign-up", { title: "sign up to be a member" });
+  if (req.user) {
+    res.send("you are already logged in");
+  } else {
+    res.render("sign-up", {
+      title: "sign up to be a member",
+    });
+  }
 }
 
 async function postSignupForm(req, res, next) {
