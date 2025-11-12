@@ -1,16 +1,21 @@
-const passwordField = document.getElementById("#password");
-const confirmPasswordField = document.getElementById("#confirm-password");
+const signupForm = document.getElementById("signup-form");
+
+console.log(signupForm);
+
+const password = signupForm.querySelector("#sign-up-password");
+const confirm = document.querySelector("#confirm-password");
+
+console.log(password);
+console.log(confirm);
 
 function validatePassword() {
-  if (passwordField.value != confirmPasswordField.value) {
-    confirmPasswordField.setCustomValidity("Passwords Don't Match");
+  if (password.value != confirm.value) {
+    confirm.setCustomValidity("Passwords Don't Match");
+    console.log("passwords don't match");
   } else {
-    confirmPasswordField.setCustomValidity("");
+    confirm.setCustomValidity("");
   }
 }
 
-// password.onchange = validatePassword;
-// confirm_password.onkeyup = validatePassword;
-
-passwordField.addEventListener("change", validatePassword);
-confirmPasswordField.addEventListener("keyup", validatePassword);
+password.addEventListener("change", validatePassword);
+confirm.addEventListener("change", validatePassword);
