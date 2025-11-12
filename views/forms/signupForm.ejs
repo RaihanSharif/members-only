@@ -1,4 +1,4 @@
-<form action="/sign-up" method="post">
+<form action="/sign-up" method="post" id="signup-form">
   <label for="fname">first name: </label>
   <input type="text" name="fname" id="fname" />
 
@@ -21,4 +21,9 @@
     id="confirm-password"
     required
   />
+  <button type="submit">Sign Up</button>
 </form>
+
+<!-- TODO: need something to check that the username is not already taken -->
+<!-- if not on form submit, if the username or email already exists, give some kind of notice. -->
+<!-- TODO: put these notes in the github project notes -->
