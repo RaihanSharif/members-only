@@ -47,6 +47,16 @@ app.post(
   })
 );
 
+// this is post rather than a get for security
+// see passport docs
+app.post("/log-out", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
   if (error) {
