@@ -6,10 +6,11 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
+const pool = require("../db/pool");
 
 const localStrat = new LocalStrategy(async (username, password, done) => {
   try {
-    const { rows } = await Pool.query(
+    const { rows } = await pool.query(
       "SELECT * FROM account WHERE username = $1",
       [username]
     );
@@ -32,12 +33,12 @@ const localStrat = new LocalStrategy(async (username, password, done) => {
 passport.use(localStrat);
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM account WHERE id = $", [
+    const { rows } = await pool.query("SELECT * FROM account WHERE id = $1", [
       id,
     ]);
     const user = rows[0];

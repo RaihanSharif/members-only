@@ -8,6 +8,7 @@
        in the system
 */
 const bcrypt = require("bcryptjs");
+const passport = require("../middlewares/authMiddleware");
 
 const pool = require("../db/pool");
 
@@ -32,7 +33,16 @@ async function postSignupForm(req, res, next) {
   }
 }
 
+function postLoginForm() {
+  return () =>
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/",
+    });
+}
+
 module.exports = {
   getSignupForm,
   postSignupForm,
+  postLoginForm,
 };
