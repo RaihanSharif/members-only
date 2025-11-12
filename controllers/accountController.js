@@ -23,16 +23,13 @@ async function postSignupForm(req, res, next) {
   }
 }
 
-function postLoginForm() {
-  return () =>
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/",
-    });
-}
+const loginController = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/",
+});
 
 module.exports = {
   getSignupForm,
   postSignupForm,
-  postLoginForm,
+  loginController,
 };

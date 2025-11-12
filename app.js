@@ -3,7 +3,7 @@ const app = express();
 const path = require("node:path");
 const passport = require("./middlewares/authMiddleware.js");
 const session = require("express-session");
-const signUpRouter = require("./routes/signupRoutes.js");
+const authRouter = require("./routes/authRoutes.js");
 
 const assetsPath = path.join(__dirname, "public");
 app.set("views", path.join(__dirname, "views"));
@@ -39,15 +39,15 @@ app.get("/", (req, res) => {
   res.render("index", { title: "welcome to members only" });
 });
 
-app.use(signUpRouter);
+app.use(authRouter);
 
-app.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/",
-  })
-);
+// app.post(
+//   "/log-in",
+//   passport.authenticate("local", {
+//     successRedirect: "/",
+//     failureRedirect: "/",
+//   })
+// );
 
 // this is post rather than a get for security
 // see passport docs
