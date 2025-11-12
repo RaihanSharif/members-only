@@ -20,6 +20,8 @@ app.use(
 );
 app.use(passport.session());
 
+// set currentUser in locals so do have to always pass req.user
+// to templates
 app.use((req, res, next) => {
   if (req.user) {
     res.locals.currentUser = req.user;
@@ -27,11 +29,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(req.session);
+//   console.log(req.user);
+//   next();
+// });
 
 app.get("/", (req, res) => {
   res.render("index", { title: "welcome to members only" });
@@ -57,6 +59,7 @@ app.post("/log-out", (req, res, next) => {
     res.redirect("/");
   });
 });
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
   if (error) {
