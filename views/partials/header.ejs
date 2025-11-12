@@ -10,18 +10,16 @@
       </li>
     </ul>
   </nav>
-  <nav>
-    <ul>
-      <!-- the logout button is form as the route controller is a post -->
-      <!-- for security reasons -->
-      <% if (locals.currentUser) { %>
-      <form action="/log-out" method="post">
-        <button type="submit">Log out</button>
-      </form>
-      <%} else { %>
-      <li><%- include('../forms/loginForm.ejs') %></li>
-      <a href="/sign-up">Sign Up</a>
-      <%}%>
-    </ul>
-  </nav>
+  <!-- the logout button is form as the route controller is a post -->
+  <!-- for security reasons -->
+  <div id="login">
+    <% if (locals.currentUser) { %>
+    <form action="/log-out" method="post">
+      <span><%= currentUser.username %></span>
+      <button type="submit">Log out</button>
+    </form>
+    <%} else { %> <%- include('../forms/loginForm.ejs') %>
+    <a href="/sign-up">Sign Up</a>
+    <%}%>
+  </div>
 </header>
