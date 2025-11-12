@@ -2,7 +2,7 @@ CREATE EXTENSION IF NOT EXISTS citext;
 
 CREATE DOMAIN domain_email AS citext
 CHECK(
-   VALUE ~ '^\w+(\.)?\w@\w+(\.[a-zA-Z]{2,}){1,2}$'
+   VALUE ~ '^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$'
 );
 
 CREATE TABLE IF NOT EXISTS account (

@@ -5,10 +5,7 @@
   </head>
   <%- include('partials/header') %>
   <body>
-    <% if (locals.currentUser) { %>
-    <h1>Welcome back <%= currentUser.username %></h1>
-    <% } %>
-
-    <p>this is the index page</p>
+    <h1><%= title %></h1>
+    <%- include('forms/signupForm') %>
   </body>
 </html>

@@ -12,10 +12,15 @@
   </nav>
   <nav>
     <ul>
+      <!-- the logout button is form as the route controller is a post -->
+      <!-- for security reasons -->
+      <% if (locals.currentUser) { %>
+      <form action="/log-out" method="post">
+        <button type="submit">Log out</button>
+      </form>
+      <%} else { %>
       <li><%- include('../forms/loginForm.ejs') %></li>
-      <li>
-        <button class="show-login-form">Log-in</button>
-      </li>
+      <%}%>
     </ul>
   </nav>
 </header>
