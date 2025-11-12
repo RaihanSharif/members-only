@@ -10,7 +10,7 @@
 
 function getSignupForm(req, res) {
   console.log("rendering sign up form");
-  res.render("sign-up", { title: "sign to be a member" });
+  res.render("sign-up", { title: "sign up to be a member" });
 }
 
 function postSignupForm(req, res) {
