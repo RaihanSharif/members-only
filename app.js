@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
 const path = require("node:path");
-const passport = require("./middlewares/authMiddleware.js");
-const session = require("express-session");
+// const passport = require("./middlewares/authMiddleware.js");
+// const session = require("express-session");
 const authRouter = require("./routes/authRoutes.js");
+const mountRoutes = require("./routes/indexRoute.js");
 
 const assetsPath = path.join(__dirname, "public");
 app.set("views", path.join(__dirname, "views"));
@@ -11,54 +12,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(assetsPath));
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-app.use(passport.session());
-
-// set currentUser in locals so do have to always pass req.user
-// to templates
-app.use((req, res, next) => {
-  if (req.user) {
-    res.locals.currentUser = req.user;
-  }
-  next();
-});
-
-// app.use((req, res, next) => {
-//   console.log(req.session);
-//   console.log(req.user);
-//   next();
-// });
-
-app.get("/", (req, res) => {
-  res.render("index", { title: "welcome to members only" });
-});
-
-app.use(authRouter);
-
-// app.post(
-//   "/log-in",
-//   passport.authenticate("local", {
-//     successRedirect: "/",
-//     failureRedirect: "/",
-//   })
-// );
-
-// this is post rather than a get for security
-// see passport docs
-app.post("/log-out", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
-});
+mountRoutes(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
