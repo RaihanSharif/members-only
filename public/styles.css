@@ -73,10 +73,21 @@ h6 {
 #__next {
   isolation: isolate;
 }
+/* end of css reset */
 
+* {
+  border: 1px solid red;
+}
 header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(auto, 2fr);
+  padding: 0.5rem 3rem;
+}
+
+#login {
+  place-self: end;
   display: flex;
-  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 nav {
