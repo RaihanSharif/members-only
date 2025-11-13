@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const passport = require("../middlewares/authMiddleware");
 
-const { validationResult, matchedData } = require("express-validator");
+const { validationResult, matchedData, check } = require("express-validator");
 
 const pool = require("../db/pool");
 const validateUser = require("../middlewares/userValidators");
