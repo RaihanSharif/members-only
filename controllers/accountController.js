@@ -29,7 +29,6 @@ const postSignupForm = [
     try {
       console = hashedPassword = await bcrypt.hash(password, 12);
 
-      const data = req.body;
       await pool.query(
         "INSERT INTO account (fname, lname, username, email, password) VALUES ($1, $2, $3, $4, $5)",
         [fname, lname, username, email, hashedPassword]
@@ -50,10 +49,13 @@ function postLogoutUser(req, res, next) {
   });
 }
 
-const loginController = passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/",
-});
+const loginController = [
+  validateUser,
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/",
+  }),
+];
 
 module.exports = {
   getSignupForm,

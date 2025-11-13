@@ -60,14 +60,19 @@ const validateUser = [
     .escape(),
   body("confirm-password")
     .trim()
+    .isStrongPassword()
+    .withMessage(
+      "password must be at least 8 characters long, contain 1 lowercase letter, one uppercase letter, and 1 symbol"
+    )
+    .escape()
     .custom((value, { req, loc, path }) => {
       if (value !== req.body.password) {
+        console.log(`value: ${value}, password: ${req.body.password}`);
         throw new Error("passwords do not match");
       } else {
         return value;
       }
-    })
-    .escape(),
+    }),
 ];
 
 module.exports = validateUser;
