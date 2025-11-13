@@ -7,7 +7,6 @@ const pool = require("../db/pool");
 const validateUser = require("../middlewares/userValidators");
 
 function getSignupForm(req, res) {
-  console.log("rendering sign up form");
   if (req.user) {
     res.send("you are already logged in");
   } else {
@@ -24,13 +23,16 @@ const postSignupForm = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
+    const { fname, lname, username, email, password } = matchedData(req);
+
     try {
-      console = hashedPassword = await bcrypt.hash(req.body.password, 12);
+      console = hashedPassword = await bcrypt.hash(password, 12);
 
       const data = req.body;
       await pool.query(
         "INSERT INTO account (fname, lname, username, email, password) VALUES ($1, $2, $3, $4, $5)",
-        [data.fname, data.lname, data.username, data.email, hashedPassword]
+        [fname, lname, username, email, hashedPassword]
       );
       res.redirect("/");
     } catch (err) {

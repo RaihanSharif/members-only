@@ -1,4 +1,4 @@
-const { body, validationResult, matchedData } = require("express-validator");
+const { body } = require("express-validator");
 const pool = require("../db/pool");
 
 //TODO: create a queries file
@@ -10,21 +10,6 @@ const lengthErr = "must be between 1 and 10 characters";
 
 const passwordlLenErr = "must be at least 8 characters long";
 const alphaNumericErr = "must only contain letters and numbers";
-
-/*
-app.post(
-  '/signup',
-  body('email').custom(async value => {
-    const existingUser = await Users.findUserByEmail(value);
-    if (existingUser) {
-      throw new Error('E-mail already in use');
-    }
-  }),
-  (req, res) => {
-    // Handle request
-  },
-);
-*/
 
 // TODO: isStrongPassword validator research
 const validateUser = [
@@ -53,19 +38,25 @@ const validateUser = [
     .isEmail()
     .withMessage(`Please use correct email formatting`)
     .custom(async (value) => {
-      const existingUser = await pool.query(
+      const { rows } = await pool.query(
         "SELECT * FROM account WHERE email = $1",
         [value]
       );
-      if (existingUser) {
+
+      if (rows.length >= 1) {
         throw new Error("E-mail already in use");
       }
     })
     .normalizeEmail(),
+  // { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1,
+  // returnScore: false, pointsPerUnique: 1, pointsPerRepeat: 0.5, pointsForContainingLower: 10,
+  // pointsForContainingUpper: 10, pointsForContainingNumber: 10, pointsForContainingSymbol: 10 }
   body("password")
     .trim()
-    .isAlphanumeric()
-    .withMessage("must be a number between 18 and 120"),
+    .isStrongPassword()
+    .withMessage(
+      "password must be at least 8 characters long, contain 1 lowercase letter, one uppercase letter, and 1 symbol"
+    ),
 ];
 
 module.exports = validateUser;
