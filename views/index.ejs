@@ -12,7 +12,7 @@
     </div>
     <% if (locals.topicList) { %> <% topicList.forEach(topic => { %>
     <div class="topic-card">
-      <span><%= topic.title%></span>
+      <span class="topic-title"><%= topic.title%></span>
       <span><%= topic.author%></span>
       <span><%= topic.created_at%></span>
       <span><%= topic.reply_count%></span>

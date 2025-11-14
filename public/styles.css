@@ -109,6 +109,15 @@ nav ul li {
 
 .topic-card {
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 2fr 0.5fr;
   gap: 1rem;
+  padding: 1rem 2rem;
+}
+
+.topic-card > * {
+  text-align: center;
+}
+
+.topic-title {
+  text-align: start;
 }
