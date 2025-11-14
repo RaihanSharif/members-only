@@ -6,13 +6,20 @@
   <%- include('partials/header') %>
   <body>
     <h1>Welcome to the message board. Here are a list of active topics</h1>
+
+    <% if (locals.currentUser) { %>
+    <a href="#">Create New Topic</a>
+    <% } %> <% if (locals.currentUser && currentUser.is_member) { %>
     <div class="topic-card header">
       <span>Title</span><span>username</span><span>posted on</span
       ><span>replies</span>
     </div>
-
-    <% if (locals.topicList) { %> <% topicList.forEach(topic => { %> <% if
-    (locals.currentUser && currentUser.is_member) { %>
+    <% } else { %>
+    <div class="topic-card header">
+      <span>Title</span><span>posted on</span><span>replies</span>
+    </div>
+    <% } %> <% if (locals.topicList) { %> <% topicList.forEach(topic => { %> <%
+    if (locals.currentUser && currentUser.is_member) { %>
 
     <div class="topic-card">
       <span class="topic-title"><%= topic.title%></span>
