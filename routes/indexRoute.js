@@ -23,6 +23,7 @@ const mountRoutes = (app) => {
     }
     next();
   });
+
   app.use(authRouter);
   app.use(topicRouter);
 };

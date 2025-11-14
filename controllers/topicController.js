@@ -12,7 +12,6 @@ async function getAllTopics(req, res) {
     GROUP BY t.id, t.title, a.username
     ORDER BY t.id;`
   );
-  console.log(rows);
   res.render("index", { title: "welcome to members only", topicList: rows });
 }
 

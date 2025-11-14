@@ -10,14 +10,24 @@
       <span>Title</span><span>username</span><span>posted on</span
       ><span>replies</span>
     </div>
-    <% if (locals.topicList) { %> <% topicList.forEach(topic => { %>
+
+    <% if (locals.topicList) { %> <% topicList.forEach(topic => { %> <% if
+    (locals.currentUser && currentUser.is_member) { %>
+
     <div class="topic-card">
       <span class="topic-title"><%= topic.title%></span>
       <span><%= topic.author%></span>
       <span><%= topic.created_at%></span>
       <span><%= topic.reply_count%></span>
     </div>
-    <%}) %> <% } %>
+
+    <% } else { %>
+    <div class="topic-card">
+      <span class="topic-title"><%= topic.title%></span>
+      <span><%= topic.created_at%></span>
+      <span><%= topic.reply_count%></span>
+    </div>
+    <% } %> <%}) %> <% } %>
 
     <p>this is the index page</p>
   </body>
