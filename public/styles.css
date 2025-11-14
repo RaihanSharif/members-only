@@ -106,3 +106,9 @@ nav ul li {
 #login-form {
   display: inline-block;
 }
+
+.topic-card {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 1fr;
+  gap: 1rem;
+}

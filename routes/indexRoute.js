@@ -3,6 +3,7 @@
 const authRouter = require("./authRoutes");
 const passport = require("../middlewares/authMiddleware.js");
 const session = require("express-session");
+const topicRouter = require("./topicsRoutes.js");
 
 // called inside of app.js to mount the routes
 const mountRoutes = (app) => {
@@ -22,12 +23,8 @@ const mountRoutes = (app) => {
     }
     next();
   });
-
-  app.get("/", (req, res) => {
-    res.render("index", { title: "welcome to members only" });
-  });
-
   app.use(authRouter);
+  app.use(topicRouter);
 };
 
 module.exports = mountRoutes;
