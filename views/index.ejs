@@ -16,7 +16,12 @@
 
     <div class="topic-card">
       <span class="topic-title"><%= topic.title%></span>
+
+      <% if (topic.author) { %>
       <span><%= topic.author%></span>
+      <% } else { %>
+      <span>Deleted User</span>
+      <% } %>
       <span><%= topic.created_at%></span>
       <span><%= topic.reply_count%></span>
     </div>
