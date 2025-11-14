@@ -7,7 +7,7 @@ async function getAllTopics(req, res) {
     COUNT(p.id) AS reply_count,
     t.created_at
     FROM topic t
-    JOIN account a ON t.author_id = a.id
+    LEFT JOIN account a ON t.author_id = a.id
     LEFT JOIN post p ON p.topic_id = t.id
     GROUP BY t.id, t.title, a.username
     ORDER BY t.id;`
