@@ -4,7 +4,7 @@ const topicValidator = require("../middlewares/topicValidator");
 
 async function getAllTopics(req, res) {
   const { rows } = await pool.query(
-    `SELECT t.title AS title,
+    `SELECT t.id, t.title AS title,
     a.username AS author,
     COUNT(p.id) AS reply_count,
     t.created_at
@@ -14,6 +14,7 @@ async function getAllTopics(req, res) {
     GROUP BY t.id, t.title, a.username
     ORDER BY t.id;`
   );
+  console.log(rows);
   res.render("index", { title: "welcome to members only", topicList: rows });
 }
 
