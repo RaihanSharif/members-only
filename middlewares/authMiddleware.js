@@ -1,8 +1,3 @@
-// the local strategy functionality should go here
-
-// passport serialize and deserialize should go here?
-
-// session goes here?
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
