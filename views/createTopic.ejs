@@ -2,12 +2,10 @@
 <html lang="en">
   <head>
     <%- include('partials/head') %>
-    <title>Create post</title>
   </head>
   <body>
-    <%- include('partials/header') %> <% if (locals.currentUser) { %> <%-
-    include('forms/createTopicForm') %> <% } else { %>
-    <p>You must be logged in to create a topic.</p>
-    }
+    <%- include('partials/header') %>
+    <h1>Create new topic</h1>
+    <%- include('forms/createTopicForm') %>
   </body>
 </html>

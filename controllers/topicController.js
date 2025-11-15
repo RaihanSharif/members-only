@@ -1,4 +1,6 @@
 const pool = require("../db/pool");
+const { validationResult, matchedData } = require("express-validator");
+const topicValidator = require("../middlewares/topicValidator");
 
 async function getAllTopics(req, res) {
   const { rows } = await pool.query(
@@ -15,11 +17,26 @@ async function getAllTopics(req, res) {
   res.render("index", { title: "welcome to members only", topicList: rows });
 }
 
-// const createTopic = [topicValidator, (req, res, next) => {}];
+function getCreateTopicForm(req, res) {
+  if (req.user) {
+    res.render("createTopic", { title: "create new topic" });
+  } else {
+    res.send("you must be logged in to create a topic");
+  }
+}
+
+const createTopic = [
+  topicValidator,
+  (req, res, next) => {
+    console.log(req.user);
+    res.send("asdf");
+  },
+];
 
 async function getSingleTopic(req, res, next) {}
 
 module.exports = {
   getAllTopics,
   getSingleTopic,
+  getCreateTopicForm,
 };

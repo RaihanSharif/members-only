@@ -15,3 +15,5 @@ const validateTopic = [
     .isLength({ min: 10 })
     .withMessage("Topic body must be at least 10 characters long"),
 ];
+
+module.exports = validateTopic;

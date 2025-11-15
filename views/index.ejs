@@ -3,12 +3,12 @@
   <head>
     <%- include('partials/head') %>
   </head>
-  <%- include('partials/header') %>
   <body>
+    <%- include('partials/header') %>
     <h1>Welcome to the message board. Here are a list of active topics</h1>
 
     <% if (locals.currentUser) { %>
-    <a href="#">Create New Topic</a>
+    <a href="/create-topic">Create New Topic</a>
     <% } %> <% if (locals.currentUser && currentUser.is_member) { %>
     <div class="topic-card header">
       <span>Title</span><span>username</span><span>posted on</span
