@@ -25,11 +25,31 @@ function getCreateTopicForm(req, res) {
   }
 }
 
-const createTopic = [
+const postCreateTopic = [
   topicValidator,
-  (req, res, next) => {
-    console.log(req.user);
-    res.send("asdf");
+  async (req, res, next) => {
+    if (!req.user) {
+      return next(new Error("user is not currently logged in"));
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { title, body } = matchedData(req);
+    try {
+      console.log(req.user.id);
+      await pool.query(
+        "INSERT INTO topic(title, body, author_id) VALUES \
+      ($1, $2, $3)",
+        [title, body, req.user.id]
+      );
+      // TODO: Later this should redirect to the topic page of the individual topic
+      res.redirect("/");
+    } catch (err) {
+      return next(err);
+    }
   },
 ];
 
@@ -39,4 +59,5 @@ module.exports = {
   getAllTopics,
   getSingleTopic,
   getCreateTopicForm,
+  postCreateTopic,
 };
