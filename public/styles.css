@@ -106,3 +106,17 @@ nav ul li {
 #login-form {
   display: inline-block;
 }
+
+.topic-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+
+.topic-card > * {
+  text-align: center;
+}
+
+.topic-title {
+  text-align: start;
+}

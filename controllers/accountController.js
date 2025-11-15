@@ -27,7 +27,7 @@ const postSignupForm = [
     const { fname, lname, username, email, password } = matchedData(req);
 
     try {
-      console = hashedPassword = await bcrypt.hash(password, 12);
+      const hashedPassword = await bcrypt.hash(password, 12);
 
       await pool.query(
         "INSERT INTO account (fname, lname, username, email, password) VALUES ($1, $2, $3, $4, $5)",

@@ -8,7 +8,6 @@ const pool = require("../db/pool");
 const alphaErr = "must only contain letters.";
 const lengthErr = "must be between 1 and 10 characters";
 
-const passwordlLenErr = "must be at least 8 characters long";
 const alphaNumericErr = "must only contain letters and numbers";
 
 // TODO: isStrongPassword validator research
