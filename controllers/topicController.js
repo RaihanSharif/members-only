@@ -15,6 +15,8 @@ async function getAllTopics(req, res) {
   res.render("index", { title: "welcome to members only", topicList: rows });
 }
 
+// const createTopic = [topicValidator, (req, res, next) => {}];
+
 async function getSingleTopic(req, res, next) {}
 
 module.exports = {
