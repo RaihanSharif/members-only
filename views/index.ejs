@@ -21,24 +21,27 @@
     <% } %> <% if (locals.topicList) { %> <% topicList.forEach(topic => { %> <%
     if (locals.currentUser && currentUser.is_member) { %>
 
-    <div class="topic-card">
-      <span class="topic-title"><%= topic.title%></span>
-
-      <% if (topic.author) { %>
-      <span><%= topic.author%></span>
-      <% } else { %>
-      <span>Deleted User</span>
-      <% } %>
-      <span><%= topic.created_at%></span>
-      <span><%= topic.reply_count%></span>
-    </div>
+    <a class="topic-item" href="topic/:<%=topic.id%>">
+      <div class="topic-card">
+        <span class="topic-title"><%= topic.title%></span>
+        <% if (topic.author) { %>
+        <span><%= topic.author%></span>
+        <% } else { %>
+        <span>Deleted User</span>
+        <% } %>
+        <span><%= topic.created_at%></span>
+        <span><%= topic.reply_count%></span>
+      </div>
+    </a>
 
     <% } else { %>
-    <div class="topic-card">
-      <span class="topic-title"><%= topic.title%></span>
-      <span><%= topic.created_at%></span>
-      <span><%= topic.reply_count%></span>
-    </div>
+    <a class="topic-item" href="topic/:<%=topic.id%>">
+      <div class="topic-card">
+        <span class="topic-title"><%= topic.title%></span>
+        <span><%= topic.created_at%></span>
+        <span><%= topic.reply_count%></span>
+      </div>
+    </a>
     <% } %> <%}) %> <% } %>
 
     <p>this is the index page</p>

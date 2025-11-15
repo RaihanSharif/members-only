@@ -107,6 +107,11 @@ nav ul li {
   display: inline-block;
 }
 
+.topic-item {
+  text-decoration: none;
+  color: inherit;
+}
+
 .topic-card {
   display: flex;
   gap: 1rem;
