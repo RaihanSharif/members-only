@@ -170,6 +170,12 @@ attributes and values in common
   margin: 0.5rem 0;
 }
 
+.topic-card:hover,
+.topic-card-member:hover {
+  background-color: rgba(240, 248, 255, 0.482);
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.406);
+}
+
 .topic-list-header,
 .topic-card {
   display: grid;
@@ -192,6 +198,9 @@ attributes and values in common
 .topic-item {
   text-decoration: none;
   color: inherit;
+}
+.topic-item:hover {
+  background-color: aliceblue;
 }
 
 .topic-title {
