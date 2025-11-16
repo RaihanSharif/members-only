@@ -86,7 +86,12 @@ async function getSingleTopic(req, res, next) {
   } catch (err) {
     return next(err);
   }
-  res.send({ topic, replies });
+  // res.send({ topic, replies });
+  res.render("singleTopic", {
+    title: `${topic.title}`,
+    topic: topic,
+    replies: replies,
+  });
 }
 
 module.exports = {
