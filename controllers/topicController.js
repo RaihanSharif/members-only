@@ -56,23 +56,18 @@ const postCreateTopic = [
 
 async function getSingleTopic(req, res, next) {
   const topicID = req.params.id;
-  console.log(topicID);
-  let topicDetails;
-  let posts;
   try {
-    const { rows } = await pool.query(
+    const result = await pool.query(
       "SELECT topic.title, topic.body, \
       topic.created_at, topic.updated_at, account.username \
-      FROM topic JOIN account \
+      FROM topic FULL JOIN account \
       ON topic.author_id = account.id \
-      WHERE account.id = $1",
+      WHERE topic.id = $1",
       [topicID]
     );
-    console.log("rows...");
-    console.log(rows);
-    topicDetails = rows[0];
-    console.log(topicDetails);
-    res.send(topicDetails);
+    const { rows } = result;
+    console.log(result);
+    res.send(rows[0]);
   } catch (err) {
     return next(err);
   }
