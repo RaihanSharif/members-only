@@ -218,10 +218,15 @@ attributes and values in common
 .reply-container {
   margin-left: 2rem;
   margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .reply-container > div {
   border-top: 1px solid darkgray;
+  display: flex;
+  gap: 1rem;
 }
 .reply-container > div > span {
   font-size: smaller;
