@@ -14,7 +14,6 @@ async function getAllTopics(req, res) {
     GROUP BY t.id, t.title, a.username
     ORDER BY created_at DESC;`
   );
-  console.log(rows);
   res.render("index", { title: "welcome to members only", topicList: rows });
 }
 
@@ -40,7 +39,6 @@ const postCreateTopic = [
 
     const { title, body } = matchedData(req);
     try {
-      console.log(req.user.id);
       await pool.query(
         "INSERT INTO topic(title, body, author_id) VALUES \
       ($1, $2, $3)",
@@ -62,7 +60,7 @@ async function getSingleTopic(req, res, next) {
 
   try {
     const { rows } = await pool.query(
-      `SELECT title, body, to_char(created_at, 'DD Mon YYYY HH24:MM') created_at, updated_at, username as author
+      `SELECT topic.id, title, body, to_char(created_at, 'DD Mon YYYY HH24:MM') created_at, updated_at, username as author
       FROM topic FULL JOIN account
       ON topic.author_id = account.id
       WHERE topic.id = $1`,
@@ -93,9 +91,32 @@ async function getSingleTopic(req, res, next) {
   });
 }
 
+async function postReply(req, res, next) {
+  const topicID = req.params.id;
+  const authorID = req.user.id;
+  const body = req.body.body;
+  console.log(topicID);
+
+  if (!req.user.id) {
+    return next(new Error("user must be logged in to post"));
+  }
+
+  try {
+    await pool.query(
+      `INSERT INTO post(body, author_id, topic_id) VALUES
+      ($1, $2, $3)`,
+      [body, authorID, topicID]
+    );
+    res.send({ topicID, authorID, body });
+  } catch (err) {
+    return next(err);
+  }
+}
+
 module.exports = {
   getAllTopics,
   getSingleTopic,
   getCreateTopicForm,
   postCreateTopic,
+  postReply,
 };

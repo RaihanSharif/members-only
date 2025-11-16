@@ -11,4 +11,5 @@ topicRouter.get("/create-topic", topicController.getCreateTopicForm);
 topicRouter.post("/create-topic", topicController.postCreateTopic);
 
 topicRouter.get("/topic/:id", topicController.getSingleTopic);
+topicRouter.post("/topic/:id/reply", topicController.postReply);
 module.exports = topicRouter;
