@@ -235,3 +235,7 @@ attributes and values in common
   border-bottom: 1px solid darkgrey;
   margin: 1rem 0;
 }
+
+textarea {
+  width: 100%;
+}

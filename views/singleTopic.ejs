@@ -17,6 +17,9 @@
           <% } %>
         </div>
       </div>
+      <% if (locals.currentUser) { %>
+      <div><%- include('forms/replyForm') %></div>
+      <% } %>
       <div class="replies-container">
         <% }%> <% if (locals.replies) { %> <% replies.forEach(reply => { %>
         <div class="reply-container">
