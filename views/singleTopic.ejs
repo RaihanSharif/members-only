@@ -4,7 +4,22 @@
     <%- include('partials/head') %>
   </head>
   <body>
-    <%- include('partials/header') %>
-    <p>lol</p>
+    <%- include('partials/header') %> <%if (locals.topic) {%>
+    <div class="topic-container">
+      <h2 class="topic-title"><%= topic.title %></h2>
+      <p class="topic-body"><%= topic.body %></p>
+      <div class="topic-meta">
+        <span>Author: <%= topic.author %></span>
+        <span>Created on: <%= topic.created_at %></span>
+        <% if (topic.updated_at) { %>
+        <span>Last updated: <%= topic.updated_at %></span>
+        <% } %>
+      </div>
+    </div>
+    <% }%> <% if (locals.replies) { %> <% replies.forEach(reply => { %>
+    <div class="reply-container">
+      <p class="reply-body"><%= reply.body %></p>
+    </div>
+    <% }) %> <% } %>
   </body>
 </html>

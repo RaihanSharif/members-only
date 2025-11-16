@@ -7,7 +7,7 @@ async function getAllTopics(req, res) {
     `SELECT t.id, t.title AS title,
     a.username AS author,
     COUNT(p.id) AS reply_count,
-    t.created_at
+    to_char(t.created_at, 'DD:MM:YYYY HH24:MM') AS created_at
     FROM topic t
     LEFT JOIN account a ON t.author_id = a.id
     LEFT JOIN post p ON p.topic_id = t.id
@@ -62,11 +62,10 @@ async function getSingleTopic(req, res, next) {
 
   try {
     const { rows } = await pool.query(
-      "SELECT topic.title, topic.body, \
-      topic.created_at, topic.updated_at, account.username as author \
-      FROM topic FULL JOIN account \
-      ON topic.author_id = account.id \
-      WHERE topic.id = $1",
+      `SELECT title, body, to_char(created_at, 'DD-MM-YYYY HH24:MM') created_at, updated_at, username as author
+      FROM topic FULL JOIN account
+      ON topic.author_id = account.id
+      WHERE topic.id = $1`,
       [topicID]
     );
     topic = rows[0];
@@ -86,7 +85,7 @@ async function getSingleTopic(req, res, next) {
   } catch (err) {
     return next(err);
   }
-  // res.send({ topic, replies });
+
   res.render("singleTopic", {
     title: `${topic.title}`,
     topic: topic,

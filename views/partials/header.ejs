@@ -15,7 +15,11 @@
   <div id="login">
     <% if (locals.currentUser) { %>
     <form action="/log-out" method="post">
+      <% if (currentUser.is_member) { %>
+      <span class="member-logged-in"><%= currentUser.username %></span>
+      <%} else { %>
       <span><%= currentUser.username %></span>
+      <% } %>
       <button type="submit">Log out</button>
     </form>
     <%} else { %> <%- include('../forms/loginForm.ejs') %>

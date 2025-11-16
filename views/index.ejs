@@ -10,19 +10,19 @@
     <% if (locals.currentUser) { %>
     <a href="/create-topic">Create New Topic</a>
     <% } %> <% if (locals.currentUser && currentUser.is_member) { %>
-    <div class="topic-card header">
+    <div class="topic-list-header-member">
       <span>Title</span><span>username</span><span>posted on</span
       ><span>replies</span>
     </div>
     <% } else { %>
-    <div class="topic-card header">
+    <div class="topic-list-header">
       <span>Title</span><span>posted on</span><span>replies</span>
     </div>
-    <% } %> <% if (locals.topicList) { %> <% topicList.forEach(topic => { %> <%
-    if (locals.currentUser && currentUser.is_member) { %>
+    <% } %> <% if (locals.topicList) { %> <% topicList.forEach(topic => { %>
+    <%if (locals.currentUser && currentUser.is_member) {%>
 
     <a class="topic-item" href="topic/<%=topic.id%>">
-      <div class="topic-card">
+      <div class="topic-card-member">
         <span class="topic-title"><%= topic.title%></span>
         <% if (topic.author) { %>
         <span><%= topic.author%></span>

@@ -75,9 +75,6 @@ h6 {
 }
 /* end of css reset */
 
-* {
-  border: 1px solid red;
-}
 header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(auto, 2fr);
@@ -107,21 +104,63 @@ nav ul li {
   display: inline-block;
 }
 
+.member-logged-in {
+  padding: 0.5rem 1rem;
+  background-color: green;
+  border: 1px solid black;
+  color: white;
+}
+
+.topic-list-header-member,
+.topic-card-member {
+  display: grid;
+  grid-template-columns: 5fr 1fr 2fr 1fr;
+  border: 1px solid black;
+  padding: 1rem;
+  gap: 1rem;
+  margin: 0.5rem 1rem;
+}
+
+.topic-list-header,
+.topic-card {
+  display: grid;
+  grid-template-columns: 5fr 2fr 1fr;
+  border: 1px solid black;
+  padding: 1rem;
+  gap: 1rem;
+  margin: 0.5rem 1rem;
+}
+
+.topic-list-header,
+.topic-list-header-member {
+  background-color: lightgray;
+}
+
 .topic-item {
   text-decoration: none;
   color: inherit;
 }
 
-.topic-card {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem 2rem;
-}
-
-.topic-card > * {
-  text-align: center;
-}
-
 .topic-title {
   text-align: start;
+}
+
+/* single topic page */
+.topic-container,
+.reply-container {
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.reply-container {
+  margin-left: 2rem;
+}
+
+.topic-container > * {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid darkgrey;
+  margin: 1rem 0;
 }
