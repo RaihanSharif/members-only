@@ -56,18 +56,33 @@ const postCreateTopic = [
 
 async function getSingleTopic(req, res, next) {
   const topicID = req.params.id;
+
   try {
-    const result = await pool.query(
+    const topicQuery = await pool.query(
       "SELECT topic.title, topic.body, \
-      topic.created_at, topic.updated_at, account.username \
-      FROM topic FULL JOIN account \
+      topic.created_at, topic.updated_at, account.username as author \
+      FROM topic JOIN account \
       ON topic.author_id = account.id \
       WHERE topic.id = $1",
       [topicID]
     );
-    const { rows } = result;
-    console.log(result);
-    res.send(rows[0]);
+
+    const topic = topicQuery.rows[0];
+
+    const repliesQuery = await pool.query(
+      "SELECT post.body, post.created_at, post.updated_at, account.username as author \
+      FROM post JOIN account ON \
+      post.author_id = account.id \
+      WHERE topic_id = $1;",
+      [topicID]
+    );
+
+    const replies = repliesQuery.rows;
+    res.render("singleTopic", {
+      title: `topic: ${topic.title}`,
+      topic: topic,
+      replies: replies,
+    });
   } catch (err) {
     return next(err);
   }

@@ -26,6 +26,11 @@ const mountRoutes = (app) => {
 
   app.use(authRouter);
   app.use(topicRouter);
+
+  // app.use((err, req, res, next) => {
+  //   console.log(err);
+  //   res.send("there was an error", err.message);
+  // });
 };
 
 module.exports = mountRoutes;
