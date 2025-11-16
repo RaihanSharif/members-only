@@ -12,7 +12,7 @@ async function getAllTopics(req, res) {
     LEFT JOIN account a ON t.author_id = a.id
     LEFT JOIN post p ON p.topic_id = t.id
     GROUP BY t.id, t.title, a.username
-    ORDER BY t.id;`
+    ORDER BY created_at DESC;`
   );
   console.log(rows);
   res.render("index", { title: "welcome to members only", topicList: rows });
