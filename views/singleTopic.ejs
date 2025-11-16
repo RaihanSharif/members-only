@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body>
+    <%- include('partials/header') %> <%if (locals.topic) {%>
+    <main>
+      <div class="topic-container">
+        <h2 class="topic-title"><%= topic.title %></h2>
+        <p class="topic-body"><%= topic.body %></p>
+        <div class="topic-meta">
+          <% if (locals.currentUser && currentUser.is_member) { %>
+          <span>Author: <%= topic.author %></span>
+          <% } %>
+          <span>Created on: <%= topic.created_at %></span>
+          <% if (topic.updated_at) { %>
+          <span>Last updated: <%= topic.updated_at %></span>
+          <% } %>
+        </div>
+      </div>
+      <% if (locals.currentUser) { %>
+      <div><%- include('forms/replyForm', {id: topic.id}) %></div>
+      <% } %>
+      <div class="replies-container">
+        <% }%> <% if (locals.replies) { %> <% replies.forEach(reply => { %>
+        <div class="reply-container">
+          <p class="reply-body"><%= reply.body %></p>
+          <div>
+            <% if (locals.currentUser && currentUser.is_member) { %>
+            <span>Author: <%= reply.author %></span>
+            <% } %>
+            <span>posted on: <%= reply.created_at %></span>
+
+            <% if (reply.updated_at) { %>
+
+            <span>Updated: <%= reply.updated_at %></span>
+            <% } %>
+          </div>
+        </div>
+        <% }) %> <% } %>
+      </div>
+    </main>
+  </body>
+</html>

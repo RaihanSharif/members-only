@@ -66,7 +66,6 @@ const validateUser = [
     .escape()
     .custom((value, { req, loc, path }) => {
       if (value !== req.body.password) {
-        console.log(`value: ${value}, password: ${req.body.password}`);
         throw new Error("passwords do not match");
       } else {
         return value;
