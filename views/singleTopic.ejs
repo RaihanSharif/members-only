@@ -23,9 +23,14 @@
           <p class="reply-body"><%= reply.body %></p>
           <div>
             <% if (locals.currentUser && currentUser.is_member) { %>
-            <span>Author: <%= reply.author %> <% } %> </span
-            ><span>Posted on: <%= reply.created_at %></span
-            ><span>Updated on: <%= reply.updated_at %></span>
+            <span>Author: <%= reply.author %></span>
+            <% } %>
+            <span>posted on: <%= reply.created_at %></span>
+
+            <% if (reply.updated_at) { %>
+
+            <span>Updated: <%= reply.updated_at %></span>
+            <% } %>
           </div>
         </div>
         <% }) %> <% } %>
