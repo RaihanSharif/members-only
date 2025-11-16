@@ -21,6 +21,12 @@
         <% }%> <% if (locals.replies) { %> <% replies.forEach(reply => { %>
         <div class="reply-container">
           <p class="reply-body"><%= reply.body %></p>
+          <div>
+            <% if (locals.currentUser && currentUser.is_member) { %>
+            <span>Author: <%= reply.author %> <% } %> </span
+            ><span>Posted on: <%= reply.created_at %></span
+            ><span>Updated on: <%= reply.updated_at %></span>
+          </div>
         </div>
         <% }) %> <% } %>
       </div>

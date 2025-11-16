@@ -220,6 +220,14 @@ attributes and values in common
   margin-bottom: 0.5rem;
 }
 
+.reply-container > div {
+  border-top: 1px solid darkgray;
+}
+.reply-container > div > span {
+  font-size: smaller;
+  font-style: italic;
+}
+
 .topic-container > * {
   border-top: none;
   border-left: none;
