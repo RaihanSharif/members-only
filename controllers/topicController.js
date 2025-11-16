@@ -54,7 +54,11 @@ const postCreateTopic = [
   },
 ];
 
-async function getSingleTopic(req, res, next) {}
+async function getSingleTopic(req, res, next) {
+  const topicID = req.params.id;
+  console.log(topicID);
+  res.send(topicID);
+}
 
 module.exports = {
   getAllTopics,

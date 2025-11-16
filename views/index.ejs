@@ -21,7 +21,7 @@
     <% } %> <% if (locals.topicList) { %> <% topicList.forEach(topic => { %> <%
     if (locals.currentUser && currentUser.is_member) { %>
 
-    <a class="topic-item" href="topic/:<%=topic.id%>">
+    <a class="topic-item" href="topic/<%=topic.id%>">
       <div class="topic-card">
         <span class="topic-title"><%= topic.title%></span>
         <% if (topic.author) { %>
@@ -35,7 +35,7 @@
     </a>
 
     <% } else { %>
-    <a class="topic-item" href="topic/:<%=topic.id%>">
+    <a class="topic-item" href="topic/<%=topic.id%>">
       <div class="topic-card">
         <span class="topic-title"><%= topic.title%></span>
         <span><%= topic.created_at%></span>
