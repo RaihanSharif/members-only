@@ -107,7 +107,7 @@ async function postReply(req, res, next) {
       ($1, $2, $3)`,
       [body, authorID, topicID]
     );
-    res.send({ topicID, authorID, body });
+    res.redirect(`/topic/${topicID}`);
   } catch (err) {
     return next(err);
   }
