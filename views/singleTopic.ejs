@@ -10,7 +10,9 @@
         <h2 class="topic-title"><%= topic.title %></h2>
         <p class="topic-body"><%= topic.body %></p>
         <div class="topic-meta">
+          <% if (locals.currentUser && currentUser.is_member) { %>
           <span>Author: <%= topic.author %></span>
+          <% } %>
           <span>Created on: <%= topic.created_at %></span>
           <% if (topic.updated_at) { %>
           <span>Last updated: <%= topic.updated_at %></span>
