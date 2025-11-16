@@ -5,45 +5,52 @@
   </head>
   <body>
     <%- include('partials/header') %>
-    <h1>Welcome to the message board. Here are a list of active topics</h1>
+    <main>
+      <h1>Welcome to the message board. Here are a list of active topics</h1>
 
-    <% if (locals.currentUser) { %>
-    <a href="/create-topic">Create New Topic</a>
-    <% } %> <% if (locals.currentUser && currentUser.is_member) { %>
-    <div class="topic-list-header-member">
-      <span>Title</span><span>username</span><span>posted on</span
-      ><span>replies</span>
-    </div>
-    <% } else { %>
-    <div class="topic-list-header">
-      <span>Title</span><span>posted on</span><span>replies</span>
-    </div>
-    <% } %> <% if (locals.topicList) { %> <% topicList.forEach(topic => { %>
-    <%if (locals.currentUser && currentUser.is_member) {%>
-
-    <a class="topic-item" href="topic/<%=topic.id%>">
-      <div class="topic-card-member">
-        <span class="topic-title"><%= topic.title%></span>
-        <% if (topic.author) { %>
-        <span><%= topic.author%></span>
+      <% if (locals.currentUser) { %>
+      <div>
+        <a id="create-topic-btn" href="/create-topic">Create New Topic</a>
+      </div>
+      <% } %>
+      <div class="content">
+        <% if (locals.currentUser && currentUser.is_member) { %>
+        <div class="topic-list-header-member">
+          <span>Title</span><span>username</span><span>posted on</span
+          ><span>replies</span>
+        </div>
         <% } else { %>
-        <span>Deleted User</span>
-        <% } %>
-        <span><%= topic.created_at%></span>
-        <span><%= topic.reply_count%></span>
-      </div>
-    </a>
+        <div class="topic-list-header">
+          <span>Title</span><span>posted on</span><span>replies</span>
+        </div>
+        <% } %> <% if (locals.topicList) { %> <% topicList.forEach(topic => { %>
+        <%if (locals.currentUser && currentUser.is_member) {%>
 
-    <% } else { %>
-    <a class="topic-item" href="topic/<%=topic.id%>">
-      <div class="topic-card">
-        <span class="topic-title"><%= topic.title%></span>
-        <span><%= topic.created_at%></span>
-        <span><%= topic.reply_count%></span>
-      </div>
-    </a>
-    <% } %> <%}) %> <% } %>
+        <a class="topic-item" href="topic/<%=topic.id%>">
+          <div class="topic-card-member">
+            <span class="topic-title"><%= topic.title%></span>
+            <% if (topic.author) { %>
+            <span><%= topic.author%></span>
+            <% } else { %>
+            <span>Deleted User</span>
+            <% } %>
+            <span><%= topic.created_at%></span>
+            <span><%= topic.reply_count%></span>
+          </div>
+        </a>
 
-    <p>this is the index page</p>
+        <% } else { %>
+        <a class="topic-item" href="topic/<%=topic.id%>">
+          <div class="topic-card">
+            <span class="topic-title"><%= topic.title%></span>
+            <span><%= topic.created_at%></span>
+            <span><%= topic.reply_count%></span>
+          </div>
+        </a>
+        <% } %> <%}) %> <% } %>
+      </div>
+
+      <p>this is the index page</p>
+    </main>
   </body>
 </html>

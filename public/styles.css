@@ -40,6 +40,7 @@ button,
 textarea,
 select {
   font: inherit;
+  cursor: pointer;
 }
 
 /* 8. Avoid text overflows */
@@ -75,16 +76,51 @@ h6 {
 }
 /* end of css reset */
 
+body {
+  background-color: rgb(202, 217, 230);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  margin: 0 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+button,
+a,
+span {
+  border-radius: 5px;
+}
+
 header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(auto, 2fr);
-  padding: 0.5rem 3rem;
+  padding: 1rem 3rem;
+  background-color: aliceblue;
+  border: 1px solid black;
+  box-shadow: 2px 2px darkgray;
+}
+
+header button {
+  padding: 0.35rem 1rem;
+  border: 1px solid black;
+}
+
+.member-logged-in {
+  padding: 0.5rem 1rem;
+  background-color: green;
+  border: 1px solid black;
+  color: white;
 }
 
 #login {
   place-self: end;
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 nav {
@@ -104,21 +140,34 @@ nav ul li {
   display: inline-block;
 }
 
-.member-logged-in {
+/* the two below selector have code smell:
+two different set of selectors with a lot of 
+attributes and values in common
+ */
+
+#create-topic-btn {
   padding: 0.5rem 1rem;
   background-color: green;
-  border: 1px solid black;
+  border-radius: 5px;
   color: white;
+  text-decoration: none;
+  border: 1px solid black;
+  font-size: larger;
+  font-weight: bold;
 }
 
+#create-topic-btn:hover {
+  background-color: rgb(1, 108, 1);
+}
 .topic-list-header-member,
 .topic-card-member {
   display: grid;
   grid-template-columns: 5fr 1fr 2fr 1fr;
   border: 1px solid black;
+  border-radius: 5px;
   padding: 1rem;
   gap: 1rem;
-  margin: 0.5rem 1rem;
+  margin: 0.5rem 0;
 }
 
 .topic-list-header,
@@ -128,12 +177,16 @@ nav ul li {
   border: 1px solid black;
   padding: 1rem;
   gap: 1rem;
-  margin: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
 }
 
 .topic-list-header,
 .topic-list-header-member {
   background-color: lightgray;
+  border: 2px solid black;
+  font-size: larger;
+  font-weight: bold;
 }
 
 .topic-item {
@@ -150,11 +203,12 @@ nav ul li {
 .reply-container {
   border: 1px solid black;
   padding: 1rem;
-  margin: 1rem;
+  border-radius: 5px;
 }
 
 .reply-container {
   margin-left: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .topic-container > * {

@@ -16,7 +16,7 @@
     <% if (locals.currentUser) { %>
     <form action="/log-out" method="post">
       <% if (currentUser.is_member) { %>
-      <span class="member-logged-in"><%= currentUser.username %></span>
+      <span class="member-logged-in">member: <%= currentUser.username %></span>
       <%} else { %>
       <span><%= currentUser.username %></span>
       <% } %>
