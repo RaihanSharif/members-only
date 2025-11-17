@@ -57,9 +57,28 @@ const loginController = [
   }),
 ];
 
+async function postMembership(req, res, next) {
+  if (process.env.MEMBER_PWORD === req.body.member_password) {
+    try {
+      await pool.query(
+        `UPDATE account
+        SET is_member = true
+        WHERE account.id = $1`,
+        [req.user.id]
+      );
+      res.redirect("/");
+    } catch (err) {
+      return next(err);
+    }
+  } else {
+    res.redirect("/");
+  }
+}
+
 module.exports = {
   getSignupForm,
   postSignupForm,
   loginController,
   postLogoutUser,
+  postMembership,
 };

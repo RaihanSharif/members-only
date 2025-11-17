@@ -244,3 +244,19 @@ attributes and values in common
 textarea {
   width: 100%;
 }
+
+.heading {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hide {
+  display: none;
+}
+
+.unhide {
+  display: flex;
+  gap: 1rem;
+}

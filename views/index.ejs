@@ -6,7 +6,16 @@
   <body>
     <%- include('partials/header') %>
     <main>
-      <h1>Welcome to the message board. Here are a list of active topics</h1>
+      <div class="heading">
+        <h1>Welcome to the message board. Here are a list of active topics</h1>
+
+        <% if (locals.currentUser && !currentUser.is_member) { %>
+        <div class="membership">
+          <button id="show-member-form-btn">Become A Member</button>
+          <%- include('forms/memberForm') %>
+        </div>
+        <% } %>
+      </div>
 
       <% if (locals.currentUser) { %>
       <div>

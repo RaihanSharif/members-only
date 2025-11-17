@@ -19,3 +19,13 @@ if (signupForm) {
   password.addEventListener("change", validatePassword);
   confirm.addEventListener("change", validatePassword);
 }
+
+const showMemberFormBtn = document.getElementById("show-member-form-btn");
+
+if (showMemberFormBtn) {
+  const form = document.getElementById("membership-form");
+  showMemberFormBtn.addEventListener("click", () => {
+    form.classList.toggle("hide");
+    showMemberFormBtn.classList.toggle("hide");
+  });
+}

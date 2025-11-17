@@ -13,4 +13,6 @@ authRouter.post("/log-in", accountController.loginController);
 
 authRouter.post("/log-out", accountController.postLogoutUser);
 
+authRouter.post("/membership", accountController.postMembership);
+
 module.exports = authRouter;
