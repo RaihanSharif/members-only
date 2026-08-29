@@ -14,14 +14,6 @@ CREATE TABLE IF NOT EXISTS account (
   password VARCHAR(255) NOT NULL,
   is_member BOOLEAN DEFAULT false);
 
-create table account(
-  id int generated always as identity primary key,
-  fname varchar(255),lname varchar(255), 
-  username varchar(255) not null unique,
-  email domain_email not null unique,
-  password varchar(255) not null,
-  is_member boolean default false);
-
 CREATE TABLE IF NOT EXISTS topic (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
